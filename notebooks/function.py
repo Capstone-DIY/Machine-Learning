@@ -1,6 +1,7 @@
 import re
 import nltk
 import numpy as np
+import tensorflow
 
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
@@ -13,10 +14,8 @@ stop_words = set(stopwords.words("english"))
 lemmatizer= WordNetLemmatizer()
 
 # for preparing input type model
-from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
-import gensim
 
 
 def lemmatization(text):
@@ -70,3 +69,32 @@ def normalized_sentence(sentence):
 
 
 # tensorflow for preparing input model
+def predicting_input(mytext):
+    # absolute path
+    # model_path = '/workspaces/Machine-Learning/model/emotion-classification.h5'
+    
+    model_path = "../model/emotion-classification.h5"
+    model = tensorflow.keras.models.load_model(model_path)
+
+    normalized_text = normalized_sentence(mytext)
+
+    tokenizer = Tokenizer(oov_token='UNK')
+    tokenizer.fit_on_texts([normalized_text])
+    X_test_seq = tokenizer.texts_to_sequences([normalized_text])
+
+    MAX_LENGTH = 500
+    X_test_pad = pad_sequences(X_test_seq, maxlen=MAX_LENGTH, truncating='pre')
+    
+    # Make the prediction
+    prediction = model.predict(X_test_pad)
+
+    # Define the class labels (ensure this matches your actual labels order)
+    labels = ['sadness', 'anger', 'love', 'surprise', 'fear', 'joy']
+    predicted_class_index = np.argmax(prediction)
+
+    # Get the corresponding label
+    predicted_label = labels[predicted_class_index]
+
+    # Return the predicted class label
+    return f"The predicted label is: {predicted_label}"
+
