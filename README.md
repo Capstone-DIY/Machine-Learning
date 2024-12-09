@@ -1,4 +1,4 @@
-<h1 align="center">PYTHON MODEL PROCESSING TO POSTMAN (SIMPLE API)</h1>
+<h1 align="center">PYTHON MODEL PROCESSING (SIMPLE API)</h1>
 
 ## Deskripsi
 Merupakan bagian proyek dari Machine Learning DIY yang terkhusus pada proses penggunaan `Framework Flask` untuk membantu pemrosesan `model h5` ke Postman.
@@ -20,8 +20,9 @@ Merupakan bagian proyek dari Machine Learning DIY yang terkhusus pada proses pen
   ```
 - Buat dan aktifkan virtual environment
   ```shell
-  pip install virtualenv
-  virtualenv .venv
+  python -m venv .venv
+  # di cmd
+  .venv\Scripts\Activate
   ```
 - Melakukan instalasi pustaka yang diperlukan
   ```shell
