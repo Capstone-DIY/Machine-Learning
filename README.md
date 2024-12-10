@@ -9,49 +9,69 @@ Proyek ini menggunakan Machine Learning untuk mendeteksi emosi dari teks dan mer
 https://colab.research.google.com/drive/1ssKkHINyTu2FSAUUOAp3Knddma_6uXwD?usp=sharing
 
 # Struktur Proyek
-Machine Learning/
-├── datasets/
-│   └── emotion-classification/
-│       └── emotion-classification.csv  # Dataset untuk klasifikasi emosi
-├── models/
-│   ├── emotion-classification.ipynb    # Notebook untuk model klasifikasi emosi
-│   ├── quotes-recommendation.ipynb     # Notebook untuk model rekomendasi kutipan
-├── preprocessing/
-│   ├── preprocessing-emotion.ipynb     # Notebook preprocessing data emosi
-│   ├── preprocessing-quotes.ipynb      # Notebook preprocessing data kutipan
-└── README.md                           # Dokumentasi proyek
+Machine Learning/ <br />
+├── datasets/ <br />
+│   └── emotion-classification/ <br />
+│       └── emotion-classification.csv  # Dataset untuk klasifikasi emosi <br />
+├── models/ <br />
+│   ├── emotion-classification.ipynb    # Notebook untuk model klasifikasi emosi <br />
+│   ├── quotes-recommendation.ipynb     # Notebook untuk model rekomendasi kutipan <br />
+├── preprocessing/ <br />
+│   ├── preprocessing-emotion.ipynb     # Notebook preprocessing data emosi <br />
+│   ├── preprocessing-quotes.ipynb      # Notebook preprocessing data kutipan <br />
+└── README.md                           # Dokumentasi proyek <br />
 
 # Datasets
 Dataset utama terletak di folder datasets/emotion-classification/ dan berisi file CSV:
 File: emotion-classification.csv
 
-# Preprocessing Datasets
-otebook: preprocessing-emotion.ipynb
+#Preprocessing Datasets
+Notebook: preprocessing-emotion.ipynb
 Mengimpor dataset dan membersihkan data.
 Mengonversi teks menjadi bentuk numerik menggunakan tokenization.
 Membagi data menjadi:
 80% untuk data latih
 10% untuk data validasi
-10% untuk data uji
+10% untuk data uji.
 
 # Training
-- Model: Jenis Model
-- Hyperparameters: 
-- Callbacks: EarlyStopping, ModelCheckpoint
-- Hasil training:
-  - Loss: [value]
-  - Accuracy: [value]
+Notebook: emotion-classification.ipynb
+Model:
+Menggunakan arsitektur transfer learning BERT.
+Ditambahkan layer tambahan pada model:
+Dense dengan relu untuk meningkatkan akurasi.
+Dropout untuk mengurangi overfitting.
+Hyperparameters:
+Optimizer: Adam (learning_rate=1e-5)
+Loss: SparseCategoricalCrossentropy
+
+Notebook: quotes-recommendation.ipynb
+Model ini bertujuan untuk merekomendasikan kutipan motivasi berdasarkan emosi.
 
 # Evaluation
 
 # Save Model
+Model disimpan dalam format .h5 dan dapat ditemukan di folder models/
+link: 
 
 # Requirement
-
-# Cara Menjalankan
+beautifulsoup4==4.12.3
+emoji==2.14.0
+Flask==3.1.0
+gensim==4.3.3
+h5py==3.12.1
+lime==0.2.0.1
+nltk==3.9.1
+numpy==1.26.4
+pandas==2.2.3
+tensorflow==2.15.0
+tensorflow_decision_forests==1.8.1
 
 ## Lisensi
 
 
 ## Kontributor
+- Anak Agung Citra Maharani - Machine Learning
+- Azhar Albaaqi Fadhullah - Machine Learning
+- I Gede Dwiky Prasetya - Machine Learning
 
