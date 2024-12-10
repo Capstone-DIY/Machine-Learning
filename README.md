@@ -73,5 +73,5 @@ tensorflow_decision_forests==1.8.1
 ## Kontributor
 - Anak Agung Citra Maharani - Machine Learning
 - Azhar Albaaqi Fadhullah - Machine Learning
-- I Gede Dwiky Prasetya - Machine Learning
+- I Gede Dwiki Yusa Prasetya - Machine Learning
 
