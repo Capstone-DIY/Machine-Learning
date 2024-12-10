@@ -1,6 +1,6 @@
 # Machine-Learning DIY
 Machine-Learning DIY
-# [Nama Proyek Anda]
+# DISCOVER INNER YOU (DIY)
 
 # Pendahuluan
 
