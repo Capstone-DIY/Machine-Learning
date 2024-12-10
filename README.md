@@ -25,7 +25,14 @@ Machine Learning/
 Dataset utama terletak di folder datasets/emotion-classification/ dan berisi file CSV:
 File: emotion-classification.csv
 
-#Preprocessing Datasets
+# Preprocessing Datasets
+otebook: preprocessing-emotion.ipynb
+Mengimpor dataset dan membersihkan data.
+Mengonversi teks menjadi bentuk numerik menggunakan tokenization.
+Membagi data menjadi:
+80% untuk data latih
+10% untuk data validasi
+10% untuk data uji
 
 # Training
 - Model: Jenis Model
