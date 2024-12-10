@@ -6,6 +6,7 @@ Machine-Learning DIY
 
 
 # Link to Colab (model)
+https://colab.research.google.com/drive/1ssKkHINyTu2FSAUUOAp3Knddma_6uXwD?usp=sharing
 
 # Load Datasets
 
