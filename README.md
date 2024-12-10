@@ -11,7 +11,6 @@ Machine-Learning DIY
 
 
 #Preprocessing Datasets
-Detail langkah-langkah preprocessing, seperti normalisasi, balancing, dll.
 
 # Training
 - Model: Jenis Model
