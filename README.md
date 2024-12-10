@@ -55,16 +55,16 @@ Model disimpan dalam format .h5 dan dapat ditemukan di folder models/
 link: 
 
 # Requirement
-beautifulsoup4==4.12.3
-emoji==2.14.0
-Flask==3.1.0
-gensim==4.3.3
-h5py==3.12.1
-lime==0.2.0.1
-nltk==3.9.1
-numpy==1.26.4
-pandas==2.2.3
-tensorflow==2.15.0
+beautifulsoup4==4.12.3<br>
+emoji==2.14.0<br>
+Flask==3.1.0<br>
+gensim==4.3.3<br>
+h5py==3.12.1<br>
+lime==0.2.0.1<br>
+nltk==3.9.1<br>
+numpy==1.26.4<br>
+pandas==2.2.3<br>
+tensorflow==2.15.0<br>
 tensorflow_decision_forests==1.8.1
 
 ## Lisensi
