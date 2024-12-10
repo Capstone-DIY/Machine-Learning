@@ -3,8 +3,6 @@ emoji==2.14.0
 Flask==3.1.0
 gensim==4.3.3
 h5py==3.12.1
-# ipykernel==6.29.5
-# ipython==8.30.0
 lime==0.2.0.1
 nltk==3.9.1
 numpy==1.26.4
