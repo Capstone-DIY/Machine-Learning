@@ -33,6 +33,8 @@ from nltk.tokenize import word_tokenize
 
 app = Flask(__name__)
 
+model = tf.keras.models.load_model(model_path)
+
 def preprocess_text(text):
     text = BeautifulSoup(text, 'html.parser').get_text()
     text = emoji.demojize(text)
@@ -52,7 +54,6 @@ def preprocess_text(text):
 # tensorflow for preparing input model
 def predicting_input(mytext):
 
-    model = tf.keras.models.load_model(model_path)
     normalized_text = preprocess_text(mytext)
 
     tokenizer = Tokenizer(oov_token='UNK')
@@ -66,14 +67,14 @@ def predicting_input(mytext):
     prediction = model.predict(X_test_pad)
 
     # Define the class labels (ensure this matches your actual labels order)
-    labels = ['sadness', 'joy', 'love', 'anger', 'fear', 'surprise']
+    labels = ['Sadness', 'Joy', 'Love', 'Anger', 'Fear', 'Surprise']
     predicted_class_index = np.argmax(prediction)
 
     # Get the corresponding label
     predicted_label = labels[predicted_class_index]
 
     # Return the predicted class label
-    return f"The predicted label is: {predicted_label} and prediction : {prediction}"
+    return predicted_label
 
 
 @app.route("/predict", methods=["GET", "POST"])
@@ -82,11 +83,10 @@ def index():
     if text is None:
         return jsonify({"error": "Form data not found"})
     
-    predicted_label, prediction = predicting_input(text)
+    predicted_label = predicting_input(text)
     
     return jsonify({
-        "predicted_label": predicted_label,
-        "prediction": prediction
+        "label": predicted_label
     })
 
 
