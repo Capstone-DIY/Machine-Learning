@@ -9,3 +9,6 @@ numpy==1.26.4
 pandas==2.2.3
 tensorflow==2.15.0
 tensorflow_decision_forests==1.8.1
+google-cloud-storage
+google-auth
+google-auth-oauthlib
