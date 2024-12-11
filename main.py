@@ -1,5 +1,6 @@
 import os
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = '2'
+model_url = os.environ['MODEL_URL']
 
 from flask import Flask, request, jsonify
 
@@ -31,8 +32,8 @@ from nltk.tokenize import word_tokenize
 
 from google.cloud import storage
 client = storage.Client()
-bucket = client.get_bucket('diy-model')
-blob = bucket.blob('emotion-classification.h5')
+bucket = client.get_bucket(model_url.split('/')[2])
+blob = bucket.blob(model_url.split('/')[3])
 model_file = blob.download_as_string()
 
 app = Flask(__name__)
