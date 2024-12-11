@@ -21,6 +21,9 @@ from nltk.tokenize import word_tokenize
 
 app = Flask(__name__)
 
+model_url = 'https://storage.googleapis.com/diy-model/emotion-classification.h5'
+model = tf.keras.models.load_model(model_url)
+
 def preprocess_text(text):
     text = BeautifulSoup(text, 'html.parser').get_text()
     text = emoji.demojize(text)
@@ -38,8 +41,6 @@ def preprocess_text(text):
 
 # TensorFlow untuk menyiapkan input model
 def predicting_input(mytext):
-    # Pastikan untuk menggunakan tensorflow.keras.models.load_model
-    model = tf.keras.models.load_model('./emotion-classification.h5')
 
     normalized_text = preprocess_text(mytext)
 
@@ -73,4 +74,5 @@ def index():
     return jsonify({"prediction_result": f"{predict_result}"})
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
+    port=int(os.environ.get("PORT", 8080))
+    app.run(debug=True, host="0.0.0.0", port=port)
