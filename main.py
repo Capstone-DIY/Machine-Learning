@@ -83,7 +83,7 @@ def predicting_input(mytext):
 def index():
     text = request.form['text']
     if text is None:
-        return jsonify({"error": "where is your file broh"})
+        return jsonify({"error": "Form data not found"})
     
     predict_result = predicting_input(text)
     
@@ -93,7 +93,3 @@ def index():
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 8080))
     app.run(debug=True, host='0.0.0.0', port=port)
-
-
-
-
