@@ -45,6 +45,8 @@
 
 ## **About Our Project**
 
+These days, more and more individuals are experiencing emotional challenges such as stress and anxiety. However, access to resources that support self-exploration and mental health is still limited. Many people have difficulty in understanding their emotional state due to the lack of tools that can help them recognize and manage their moods independently. Discover Inner You is designed to fill this gap by providing tools that analyze users' feelings based on their daily notes. As such, the app aims to empower users to understand and manage their emotional state, as well as provide recommendations that can support their mental well-being.
+
 <p align="center">
     <img src="images/mockup/Halaman Pembuka.png"
         style="margin-right: 10px;"
@@ -68,9 +70,6 @@
         style="margin-right: 10px;"
         width="100" />
 </p>
-
-These days, more and more individuals are experiencing emotional challenges such as stress and anxiety. However, access to resources that support self-exploration and mental health is still limited. Many people have difficulty in understanding their emotional state due to the lack of tools that can help them recognize and manage their moods independently. Discover Inner You is designed to fill this gap by providing tools that analyze users' feelings based on their daily notes. As such, the app aims to empower users to understand and manage their emotional state, as well as provide recommendations that can support their mental well-being.
-
 
 ## **Our Tools**
 
