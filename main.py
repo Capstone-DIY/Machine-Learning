@@ -79,12 +79,18 @@ def predicting_input(mytext):
 
 @app.route("/predict", methods=["GET", "POST"])
 def index():
-    text = request.form['text']
-    if text is None:
-        return jsonify({"error": "Form data not found"})
-    
+    if request.method == "GET":
+        text = request.args.get('text')  # For GET requests, use request.args for query parameters
+    elif request.method == "POST":
+        text = request.form.get('text')  # For POST requests, use request.form for form data
+
+    if not text:
+        return jsonify({"error": "Text parameter not found"}), 400  # Handle missing text
+
+    # Process the text and get the predicted label
     predicted_label = predicting_input(text)
-    
+
+    # Return the prediction result as JSON
     return jsonify({
         "label": predicted_label
     })
