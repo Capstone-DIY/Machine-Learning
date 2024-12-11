@@ -1,6 +1,5 @@
 import os
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = '2'
-model_url = os.environ['MODEL_URL']
 
 from flask import Flask, request, jsonify
 
@@ -22,6 +21,8 @@ nltk.download('punkt_tab')
 stop_words = set(stopwords.words("english"))
 lemmatizer= WordNetLemmatizer()
 
+model_path = 'gs://diy-model/emotion-classification.h5'
+
 # for preparing input type model
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
@@ -30,15 +31,7 @@ import emoji
 from bs4 import BeautifulSoup, MarkupResemblesLocatorWarning
 from nltk.tokenize import word_tokenize
 
-from google.cloud import storage
-client = storage.Client()
-bucket = client.get_bucket(model_url.split('/')[2])
-blob = bucket.blob(model_url.split('/')[3])
-model_file = blob.download_as_string()
-
 app = Flask(__name__)
-
-model = tf.keras.models.load_model(model_file)
 
 def preprocess_text(text):
     text = BeautifulSoup(text, 'html.parser').get_text()
@@ -55,9 +48,12 @@ def preprocess_text(text):
 
     return ' '.join(words)
 
+
+
 # tensorflow for preparing input model
 def predicting_input(mytext):
 
+    model = tf.keras.models.load_model(model_path)
     normalized_text = preprocess_text(mytext)
 
     tokenizer = Tokenizer(oov_token='UNK')
