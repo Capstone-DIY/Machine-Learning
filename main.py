@@ -2,27 +2,42 @@ import os
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = '2'
 
 from flask import Flask, request, jsonify
+
 import re
 import nltk
 import numpy as np
 import tensorflow as tf
+import h5py
 
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
-# Pastikan menggunakan tensorflow.keras untuk memuat model
-from tensorflow.keras.models import load_model
+from keras.models import load_model
+from tensorflow import keras
+
+nltk.download("stopwords")
+nltk.download('punkt_tab')
+
+stop_words = set(stopwords.words("english"))
+lemmatizer= WordNetLemmatizer()
+
+# for preparing input type model
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 import emoji
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, MarkupResemblesLocatorWarning
 from nltk.tokenize import word_tokenize
+
+from google.cloud import storage
+client = storage.Client()
+bucket = client.get_bucket('diy-model')
+blob = bucket.blob('emotion-classification.h5')
+model_file = blob.download_as_string()
 
 app = Flask(__name__)
 
-model_url = 'https://storage.googleapis.com/diy-model/emotion-classification.h5'
-model = tf.keras.models.load_model(model_url)
+model = tf.keras.models.load_model(model_file)
 
 def preprocess_text(text):
     text = BeautifulSoup(text, 'html.parser').get_text()
@@ -39,7 +54,7 @@ def preprocess_text(text):
 
     return ' '.join(words)
 
-# TensorFlow untuk menyiapkan input model
+# tensorflow for preparing input model
 def predicting_input(mytext):
 
     normalized_text = preprocess_text(mytext)
@@ -51,17 +66,19 @@ def predicting_input(mytext):
     MAX_LENGTH = 500
     X_test_pad = pad_sequences(X_test_seq, maxlen=MAX_LENGTH, truncating='pre')
 
-    # Melakukan prediksi
+    # Make the prediction
     prediction = model.predict(X_test_pad)
 
-    # Definisikan label kelas (pastikan urutan label sesuai)
+    # Define the class labels (ensure this matches your actual labels order)
     labels = ['sadness', 'joy', 'love', 'anger', 'fear', 'surprise']
     predicted_class_index = np.argmax(prediction)
 
-    # Ambil label yang sesuai
+    # Get the corresponding label
     predicted_label = labels[predicted_class_index]
 
-    return f"The predicted label is: {predicted_label} and prediction: {prediction}"
+    # Return the predicted class label
+    return f"The predicted label is: {predicted_label} and prediction : {prediction}"
+
 
 @app.route("/predict", methods=["GET", "POST"])
 def index():
@@ -71,7 +88,8 @@ def index():
     
     predict_result = predicting_input(text)
     
-    return jsonify({"prediction_result": f"{predict_result}"})
+    return jsonify({"prediction_result":f"{predict_result}"})
+
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
