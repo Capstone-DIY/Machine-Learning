@@ -49,7 +49,6 @@ def preprocess_text(text):
     return ' '.join(words)
 
 
-
 # tensorflow for preparing input model
 def predicting_input(mytext):
 
@@ -83,9 +82,12 @@ def index():
     if text is None:
         return jsonify({"error": "Form data not found"})
     
-    predict_result = predicting_input(text)
+    predicted_label, prediction = predicting_input(text)
     
-    return jsonify({"prediction_result":f"{predict_result}"})
+    return jsonify({
+        "predicted_label": predicted_label,
+        "prediction": prediction
+    })
 
 
 if __name__ == "__main__":
