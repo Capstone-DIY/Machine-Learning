@@ -18,7 +18,7 @@ steps:
     args:
       - 'run'
       - 'deploy'
-      - 'diy-ml-api'
+      - 'diy-ml'
       - '--image'
       - 'asia-southeast2-docker.pkg.dev/$PROJECT_ID/diy-ml/diy-ml-api:$COMMIT_SHA'
       - '--allow-unauthenticated'
