@@ -29,10 +29,6 @@ import emoji
 from bs4 import BeautifulSoup, MarkupResemblesLocatorWarning
 from nltk.tokenize import word_tokenize
 
-
-
-model = tf.keras.models.load_model('emotion-classification.h5')
-
 app = Flask(__name__)
 
 def preprocess_text(text):
@@ -54,7 +50,7 @@ def preprocess_text(text):
 
 # tensorflow for preparing input model
 def predicting_input(mytext):
-    model = tf.keras.models.load_model('emotion-classification.h5')
+    model = tf.keras.models.load_model('./emotion-classification.h5')
 
     normalized_text = preprocess_text(mytext)
 
