@@ -21,7 +21,7 @@ nltk.download('punkt_tab')
 stop_words = set(stopwords.words("english"))
 lemmatizer= WordNetLemmatizer()
 
-model_path = 'gs://diy-model/emotion-classification.h5'
+model_path = 'gs://diy-ml-model/emotion-classification.h5'
 
 # for preparing input type model
 from tensorflow.keras.preprocessing.text import Tokenizer
