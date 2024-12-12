@@ -29,7 +29,7 @@ steps:
       - '--cpu'
       - '2'
       - '--memory'
-      - '2G'
+      - '4G'
       - '--min-instances'
       - '1'
       - '--max-instances'
