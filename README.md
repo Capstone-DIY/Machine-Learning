@@ -1,37 +1,34 @@
 <h1 align="center">PYTHON MODEL PROCESSING (SIMPLE API)</h1>
 
 ## Deskripsi
-Merupakan bagian proyek dari Machine Learning DIY yang terkhusus pada proses penggunaan `Framework Flask` untuk membantu pemrosesan `model h5` ke Postman.
+Merupakan bagian proyek dari Machine Learning DIY yang terkhusus pada proses deployment menggunakan `Framework Flask, Postman, dan Docker`.
 
 ## Instalasi
-`Choose python 3.10.0`
+Ensure you have docker dekstop installed
 - Clone repository ini
   ```shell
-  git clone xxx
+  git clone https://github.com/Capstone-DIY/Machine-Learning.git
   ```
 - Masuk ke direktori
   ```shell
-  cd xxx
+  cd Machine-Learning
   code .
   ```
 - Pindah branch
   ```shell
   git checkout deployment
   ```
-- Buat dan aktifkan virtual environment
+- Buat docker images
   ```shell
-  python -m venv .venv
-  # di cmd
-  .venv\Scripts\Activate
+  docker build -t ml-diy .
   ```
-- Melakukan instalasi pustaka yang diperlukan
+- Jalankan container
   ```shell
-  pip install -r requirements.txt
+  docker container run -d -p 8080:8080 ml-diy 
   ```
 
 ## Menjalankan aplikasi
-   ```shell
-  flask --app main run
-   ```
+  Try to run this path in postman and give the form data "text"
+  http://127.0.0.1:8080/predict  
 
 <h3 align="center">Thank U for Coming Here!😊</h3>
