@@ -1,11 +1,14 @@
 beautifulsoup4==4.12.3
+gunicorn==23.0.0
 emoji==2.14.0
 Flask==3.1.0
 gensim==4.3.3
-h5py==3.12.1
 lime==0.2.0.1
 nltk==3.9.1
 numpy==1.26.4
 pandas==2.2.3
 tensorflow==2.15.0
 tensorflow_decision_forests==1.8.1
+google-cloud-storage
+google-auth
+google-auth-oauthlib

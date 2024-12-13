@@ -21,6 +21,8 @@ nltk.download('punkt_tab')
 stop_words = set(stopwords.words("english"))
 lemmatizer= WordNetLemmatizer()
 
+model_path = 'gs://diy-ml-model/emotion-classification.h5'
+
 # for preparing input type model
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
@@ -29,11 +31,9 @@ import emoji
 from bs4 import BeautifulSoup, MarkupResemblesLocatorWarning
 from nltk.tokenize import word_tokenize
 
-
-
-model = tf.keras.models.load_model('emotion-classification.h5')
-
 app = Flask(__name__)
+
+model = tf.keras.models.load_model(model_path)
 
 def preprocess_text(text):
     text = BeautifulSoup(text, 'html.parser').get_text()
@@ -51,10 +51,8 @@ def preprocess_text(text):
     return ' '.join(words)
 
 
-
 # tensorflow for preparing input model
 def predicting_input(mytext):
-    model = tf.keras.models.load_model('emotion-classification.h5')
 
     normalized_text = preprocess_text(mytext)
 
@@ -69,31 +67,38 @@ def predicting_input(mytext):
     prediction = model.predict(X_test_pad)
 
     # Define the class labels (ensure this matches your actual labels order)
-    labels = ['sadness', 'joy', 'love', 'anger', 'fear', 'surprise']
+    labels = ['Sadness', 'Joy', 'Love', 'Anger', 'Fear', 'Surprise']
     predicted_class_index = np.argmax(prediction)
 
     # Get the corresponding label
     predicted_label = labels[predicted_class_index]
 
     # Return the predicted class label
-    return f"The predicted label is: {predicted_label} and prediction : {prediction}"
+    return predicted_label
 
 
 @app.route("/predict", methods=["GET", "POST"])
 def index():
-    text = request.form['text']
-    if text is None:
-        return jsonify({"error": "where is your file broh"})
-    
-    predict_result = predicting_input(text)
-    
-    return jsonify({"prediction_result":f"{predict_result}"})
+    if request.method == "GET":
+        # For GET requests, get the 'text' parameter from the query string
+        text = request.args.get('text')  # Use request.args for query parameters
+
+    elif request.method == "POST":
+        # For POST requests, use request.get_json() to parse JSON data from the request body
+        data = request.get_json()  # This will parse the incoming JSON payload
+        text = data.get('text')  # Extract the 'text' field from the JSON
+
+    if not text:
+        return jsonify({"error": "Text parameter not found"}), 400  # Handle missing 'text'
+
+    # Process the text and get the predicted label
+    predicted_label = predicting_input(text)
+
+    # Return the prediction result as JSON
+    return jsonify({
+        "label": predicted_label
+    })
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 8080))
-    app.run(debug=True, host='0.0.0.0', port=port)
-
-
-
-
+    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))

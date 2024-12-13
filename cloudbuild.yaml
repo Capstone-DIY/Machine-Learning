@@ -1,0 +1,42 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'build',
+        '-t',
+        'asia-southeast2-docker.pkg.dev/$PROJECT_ID/diy-ml/diy-ml-api:$COMMIT_SHA',
+        '.',
+      ]
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'push',
+        'asia-southeast2-docker.pkg.dev/$PROJECT_ID/diy-ml/diy-ml-api:$COMMIT_SHA',
+      ]
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'diy-ml'
+      - '--image'
+      - 'asia-southeast2-docker.pkg.dev/$PROJECT_ID/diy-ml/diy-ml-api:$COMMIT_SHA'
+      - '--allow-unauthenticated'
+      - '--service-account'
+      - 'run-diy-ml@diy-capstone-dev.iam.gserviceaccount.com'
+      - '--region'
+      - 'asia-southeast2'
+      - '--cpu'
+      - '2'
+      - '--memory'
+      - '4G'
+      - '--min-instances'
+      - '1'
+      - '--max-instances'
+      - '3'
+      - '--port'
+      - '8080'
+options:
+  logging: CLOUD_LOGGING_ONLY
+images:
+  - 'asia-southeast2-docker.pkg.dev/$PROJECT_ID/diy-ml/diy-ml-api:$COMMIT_SHA'
