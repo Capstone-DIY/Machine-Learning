@@ -76,7 +76,7 @@ ML Path
 | :------------------------ | :----: | :------------------------ |
 | Anak Agung Citra Maharani | **ML** | agungcitra0103@gmail.com  |
 | Azhar Albaaqi Fadhullah   | **ML** | azharfadullah@gmail.com   |
-| I Gede Dwiky Prasetya     | **ML** | dwikiyus4@gmail.com       |
+| I Gede Dwiki Yusa Prasetya     | **ML** | dwikiyus4@gmail.com       |
 
 <!-- ACKNOWLEDGMENTS -->
 
